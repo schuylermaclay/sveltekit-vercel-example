@@ -7,11 +7,9 @@
 </svelte:head>
 
 <section>
-	<h1>
-		Home
-	</h1>
+	<h1>Home</h1>
 
-	<a href="/planets">planets</a>
+	<a href="/planets?page=1">planets</a>
 </section>
 
 <style>
@@ -26,5 +24,4 @@
 	h1 {
 		width: 100%;
 	}
-
 </style>
