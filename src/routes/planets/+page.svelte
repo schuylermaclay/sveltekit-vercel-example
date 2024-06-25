@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	// import { confetti } from '@neoconfetti/svelte';
 	import PlanetsTable from '$lib/components/PlanetsTable.svelte';
-	import { onMount } from 'svelte';
 
 	export let data;
 

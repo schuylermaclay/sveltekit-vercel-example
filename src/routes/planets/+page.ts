@@ -7,6 +7,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
 	// fetch a page of planets from SWAPI
 	async function getData() {
 		const res = await fetch(`https://swapi.dev/api/planets/?limit=10&page=${pageParam}`);
+		console.log(`res: ${JSON.stringify(res)}`);
 
 		if (res.ok) {
 			const data = await res.json();
