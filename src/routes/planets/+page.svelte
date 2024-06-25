@@ -8,12 +8,7 @@
 
 	$: currentPage = $page.url.searchParams.get('page') || '1';
 	$: planets = data.planets;
-
-	onMount(() => {
-		return page.subscribe(() => {
-			console.log(`currentPage: ${currentPage}`);
-		});
-	});
+	$: totalPages = Math.ceil(data.count / 10);
 </script>
 
 <svelte:head>
@@ -23,7 +18,7 @@
 
 <h1>Planets</h1>
 
-<PlanetsTable {planets} {currentPage} />
+<PlanetsTable {planets} {currentPage} {totalPages} />
 
 <style>
 </style>
