@@ -1,12 +1,32 @@
 // import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
+// import { getPlanetsFromLocal } from '$lib/indexedDB';
 
 export const load: PageLoad = async ({ fetch, url }) => {
 	const pageParam = url.searchParams.get('page');
+	const urlString = `https://swapi.dev/api/planets/?limit=10&page=${pageParam}`;
+
+	async function getPlanetsFromLocalOrRemote() {
+		// let planets;
+		if (typeof window !== 'undefined' && typeof indexedDB !== 'undefined') {
+			// planets = await getPlanetsFromLocal(urlString);
+			// if (planets) {
+			// return {
+			// 	planets: planets.results,
+			// 	count: planets.count
+			// };
+			// }
+		}
+
+		// fetch from remote
+		const planets = await getPlanetDataFromRemote(urlString);
+		// await savePlanetsToLocal(planets);
+		return planets;
+	}
 
 	// fetch a page of planets from SWAPI
-	async function getData() {
-		const res = await fetch(`https://swapi.dev/api/planets/?limit=10&page=${pageParam}`);
+	async function getPlanetDataFromRemote(url: string) {
+		const res = await fetch(url);
 		console.log(`res: ${JSON.stringify(res)}`);
 
 		if (res.ok) {
@@ -22,7 +42,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
 		}
 	}
 
-	const { planets, count } = await getData();
+	const { planets, count } = await getPlanetsFromLocalOrRemote();
 
 	return {
 		planets,
