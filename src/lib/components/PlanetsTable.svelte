@@ -13,6 +13,7 @@
 	export let planets: Planet[];
 	export let currentPage: string;
 	export let totalPages: number;
+	export let search: string;
 	console.log(`currentPage: ${currentPage}`);
 
 	function getIdFromUrl(url: string): string {
@@ -51,10 +52,15 @@
 </table>
 
 <div class="pagination">
-	<a href="?page={Number(currentPage) - 1}" class:disabled={currentPage === '1'}>Previous</a>
-	<span>Page {currentPage} of {totalPages}</span>
-	<a href="?page={Number(currentPage) + 1}" class:disabled={Number(currentPage) >= totalPages}
-		>Next</a
+	<a href="?page={Number(currentPage) - 1}&search={search}" class:disabled={currentPage === '1'}
+		>Previous</a
+	>
+	<span> Page {currentPage} of {totalPages}</span>
+	<a
+		href="?page={Number(currentPage) + 1}&search={search}"
+		class:disabled={Number(currentPage) >= totalPages}
+	>
+		Next</a
 	>
 </div>
 

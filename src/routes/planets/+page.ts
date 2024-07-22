@@ -4,7 +4,8 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, url }) => {
 	const pageParam = url.searchParams.get('page');
-	const urlString = `https://swapi.dev/api/planets/?limit=10&page=${pageParam}`;
+	const searchParam = url.searchParams.get('search');
+	const urlString = `https://swapi.dev/api/planets/?limit=10&page=${pageParam}&search=${searchParam}`;
 
 	async function getPlanetsFromLocalOrRemote() {
 		// let planets;
@@ -26,6 +27,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
 
 	// fetch a page of planets from SWAPI
 	async function getPlanetDataFromRemote(url: string) {
+		console.log(`url: ${url}`);
 		const res = await fetch(url);
 		console.log(`res: ${JSON.stringify(res)}`);
 
@@ -46,6 +48,7 @@ export const load: PageLoad = async ({ fetch, url }) => {
 
 	return {
 		planets,
-		count
+		count,
+		searchParam: searchParam || ''
 	};
 };
